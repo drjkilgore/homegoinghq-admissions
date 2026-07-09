@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HomegoingHQ Academy — Admissions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#26332E; --parch:#F6F2EA; --warm:#FFFDF9; --brass:#8F6A24; --dbrass:#75561D;
+  --gold:#C9A24B; --sage:#6E8273; --linen:#E4DDCE; --moss:#68756D;
+  --radius:16px; --radius-sm:11px; --shadow:0 2px 10px rgba(38,51,46,.06);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--parch);color:var(--ink);font-family:'Public Sans',Arial,sans-serif;line-height:1.55;}
+h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:500;letter-spacing:-.01em;margin:0 0 .3em;}
+a{color:var(--dbrass)}
+.wrap{max-width:940px;margin:0 auto;padding:0 22px 80px;}
+.topbar{display:flex;align-items:center;gap:12px;padding:16px 22px;border-bottom:1px solid var(--linen);background:var(--warm);position:sticky;top:0;z-index:20;}
+.topbar .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:19px;}
+.topbar .brand b{color:var(--brass);font-weight:600;}
+.topbar .sp{flex:1}
+.topbar nav a{margin-left:16px;font-size:13px;font-weight:600;text-decoration:none;color:var(--moss);letter-spacing:.02em;}
+.topbar nav a.on{color:var(--ink);}
+.med{width:34px;height:34px;flex:none}
+.eyebrow{font-family:'Public Sans',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);}
+.card{background:var(--warm);border:1px solid var(--linen);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px;}
+.muted{color:var(--moss);}
+label{display:block;font-weight:700;font-size:13px;margin:14px 0 5px;}
+input,select,textarea{width:100%;padding:11px 13px;border:1px solid var(--linen);border-radius:10px;background:var(--warm);font:inherit;color:var(--ink);}
+input:focus,select,textarea:focus{outline:2px solid rgba(143,106,36,.25);border-color:var(--brass);}
+textarea{min-height:96px;resize:vertical;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 18px;}
+@media(max-width:620px){.grid2{grid-template-columns:1fr;}}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--brass);color:#fff;border:none;border-radius:11px;
+  font:inherit;font-weight:700;font-size:15px;padding:13px 24px;cursor:pointer;text-decoration:none;transition:background .15s;}
+.btn:hover{background:var(--dbrass);}
+.btn.ghost{background:transparent;color:var(--dbrass);border:1px solid var(--linen);}
+.btn.ghost:hover{background:var(--parch);color:var(--ink);}
+.btn.sm{padding:8px 14px;font-size:13px;border-radius:9px;}
+.btn.dark{background:var(--ink);} .btn.dark:hover{background:#1c2723;}
+.btn.danger{background:#8a3b2e;} .btn.danger:hover{background:#6f2f24;}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.hero{background:var(--ink);color:var(--parch);border-radius:var(--radius);padding:40px 30px;text-align:center;position:relative;overflow:hidden;margin:26px 0;}
+.hero::after{content:"";position:absolute;inset:12px;border:1px solid rgba(201,162,75,.32);border-radius:12px;pointer-events:none;}
+.hero h1{color:var(--parch);font-size:clamp(26px,4.5vw,40px);}
+.hero .eyebrow{color:var(--gold);}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.04em;padding:4px 11px;border-radius:100px;text-transform:uppercase;}
+/* status colors */
+.s-pending{background:#eee7d7;color:#6b5a2c;}
+.s-review{background:#dfe7ea;color:#3d5560;}
+.s-info{background:#efe0cf;color:#7a5320;}
+.s-interview{background:#e2e0ef;color:#4b4870;}
+.s-waitlist{background:#efe6d3;color:#6b5a2c;}
+.s-conditional{background:#e6eadf;color:#4f6142;}
+.s-deferred{background:#e8e4da;color:#615c50;}
+.s-admitted{background:rgba(110,130,115,.22);color:#3f5347;}
+.s-denied{background:rgba(138,59,46,.14);color:#7a3327;}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin:18px 0 22px;}
+.stat{background:var(--warm);border:1px solid var(--linen);border-radius:var(--radius-sm);padding:14px 16px;}
+.stat b{font-family:'Fraunces',serif;font-size:28px;display:block;color:var(--ink);}
+.stat span{font-size:12px;color:var(--moss);letter-spacing:.03em;}
+table{width:100%;border-collapse:collapse;font-size:14px;}
+th{text-align:left;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--moss);padding:8px 10px;border-bottom:1px solid var(--linen);}
+td{padding:11px 10px;border-bottom:1px solid var(--linen);vertical-align:middle;}
+tr.clk{cursor:pointer;} tr.clk:hover{background:var(--parch);}
+.drawer-bg{position:fixed;inset:0;background:rgba(38,51,46,.42);display:none;z-index:40;}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(560px,100%);background:var(--parch);z-index:41;
+  transform:translateX(100%);transition:transform .28s ease;display:none;overflow-y:auto;box-shadow:-8px 0 30px rgba(0,0,0,.15);}
+.drawer.open{transform:none;display:block;} .drawer-bg.open{display:block;}
+.drawer .dhead{position:sticky;top:0;background:var(--warm);border-bottom:1px solid var(--linen);padding:18px 22px;display:flex;align-items:center;gap:10px;}
+.drawer .body{padding:22px;}
+.field{margin:2px 0 12px;} .field .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--moss);}
+.field .v{font-size:15px;}
+.note{background:var(--warm);border:1px solid var(--linen);border-radius:10px;padding:10px 12px;margin:8px 0;font-size:14px;}
+.note .meta{font-size:11px;color:var(--moss);margin-bottom:3px;}
+.timeline{border-left:2px solid var(--linen);margin:8px 0 8px 6px;padding-left:16px;}
+.timeline .ev{position:relative;margin-bottom:12px;font-size:13px;}
+.timeline .ev::before{content:"";position:absolute;left:-22px;top:4px;width:9px;height:9px;border-radius:50%;background:var(--brass);}
+.banner{background:rgba(143,106,36,.10);border:1px solid rgba(143,106,36,.3);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--dbrass);margin:14px 0;}
+.tokenbox{background:var(--ink);color:var(--gold);border-radius:10px;padding:12px 14px;font-family:ui-monospace,monospace;font-size:12px;word-break:break-all;margin:8px 0;}
+.tiers{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:18px 0;}
+@media(max-width:720px){.tiers{grid-template-columns:1fr;}}
+.tier{background:var(--warm);border:1px solid var(--linen);border-radius:var(--radius-sm);padding:20px;text-align:center;}
+.tier .amt{font-family:'Fraunces',serif;font-size:30px;color:var(--ink);}
+.tier .lbl{font-size:12px;color:var(--moss);letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px;}
+.demo{position:fixed;bottom:12px;left:12px;background:var(--ink);color:var(--gold);font-size:11px;padding:6px 12px;border-radius:100px;z-index:60;letter-spacing:.04em;}
+.steps{counter-reset:s;margin:16px 0;}
+.steps .st{display:flex;gap:14px;margin:12px 0;}
+.steps .st .n{counter-increment:s;flex:none;width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--gold);
+  display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:15px;}
+.steps .st .n::before{content:counter(s);}
+hr{border:none;border-top:1px solid var(--linen);margin:20px 0;}
+.center{text-align:center;}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <svg class="med" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47" fill="#26332E" stroke="#8F6A24" stroke-width="5"/><circle cx="50" cy="50" r="39" fill="none" stroke="#C9A24B" stroke-width="1.4"/><text x="50" y="66" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="46" fill="#C9A24B">H</text></svg>
+  <div class="brand">Homegoing<b>HQ</b> <span class="muted" style="font-size:13px;font-family:'Public Sans';">Admissions</span></div>
+  <div class="sp"></div>
+  <nav id="nav">
+    <a href="#apply" data-r="apply">Apply</a>
+    <a href="#admin" data-r="admin">Admin</a>
+  </nav>
+</div>
+<div class="wrap" id="app"></div>
+
+<!-- drawer -->
+<div class="drawer-bg" id="dbg"></div>
+<div class="drawer" id="drawer"></div>
+
+<div class="demo" id="demoTag" style="display:none;">DEMO MODE · data is in-memory</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
+/* ============================================================
+   CONFIG  — fill these for production. Leave Supabase blank to
+   run in DEMO mode (in-memory, seeded) so you can click around.
+============================================================ */
+const CONFIG = {
+  SUPABASE_URL: "",              // e.g. https://xxxx.supabase.co
+  SUPABASE_ANON_KEY: "",         // anon public key
+  PAYTHEN: {
+    founding:  "#PAYTHEN_FOUNDING",   // $99/mo founding seat
+    cert_full: "#PAYTHEN_CERT_FULL",  // $995 one-time
+    cert_plan: "#PAYTHEN_CERT_PLAN"   // 3 x $525
+  },
+  ENROLL_BASE: "https://concierge.homegoinghq.com/#enroll", // where acceptance links point
+  START_DATES: ["Cohort 1 — March 3", "Cohort 2 — June 2", "Rolling self-paced"],
+  ADMIN_DEMO: { email: "admin@homegoinghq.com", pass: "demo" } // DEMO only
+};
+
+const STATUSES = [
+  {k:"pending",    label:"Pending",           cls:"s-pending"},
+  {k:"review",     label:"Under Review",      cls:"s-review"},
+  {k:"info",       label:"More Info Requested",cls:"s-info"},
+  {k:"interview",  label:"Interview",         cls:"s-interview"},
+  {k:"waitlist",   label:"Waitlisted",        cls:"s-waitlist"},
+  {k:"conditional",label:"Conditional",       cls:"s-conditional"},
+  {k:"deferred",   label:"Deferred",          cls:"s-deferred"},
+  {k:"admitted",   label:"Admitted",          cls:"s-admitted"},
+  {k:"denied",     label:"Denied",            cls:"s-denied"}
+];
+const stMeta = k => STATUSES.find(s=>s.k===k) || STATUSES[0];
+
+/* ============================================================
+   DATA LAYER — Supabase when configured, else in-memory demo.
+============================================================ */
+const USE_SB = !!(CONFIG.SUPABASE_URL && CONFIG.SUPABASE_ANON_KEY);
+let sb = null;
+if (USE_SB) sb = supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
+
+const uid = () => 'a_' + Math.random().toString(36).slice(2,10);
+const token = () => (Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2)).slice(0,24);
+const now = () => new Date().toISOString();
+const fmt = d => new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+const fmtT = d => new Date(d).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
+
+/* demo seed */
+let DEMO = [
+  {id:uid(),created_at:days(-2),full_name:"Renae Palmer",email:"renae@example.com",phone:"313-555-0142",
+   city:"Detroit, MI",background:"Ministry / church leadership",tier:"founding",
+   why:"I handled everything when my mother passed, and my church keeps sending me to families who are lost. I want to be trained to do it well.",
+   community:"My church family and the east side of Detroit",availability:"Part-time to start",
+   status:"review",token:null,notes:[{t:days(-1),by:"You",text:"Strong ministry roots. Wants to serve east side."}],
+   history:[{t:days(-2),s:"pending",by:"System"},{t:days(-1),s:"review",by:"You"}],docs:[]},
+  {id:uid(),created_at:days(-4),full_name:"Marcus Boykin",email:"mboykin@example.com",phone:"313-555-0199",
+   city:"Southfield, MI",background:"Funeral / death care",tier:"cert_full",
+   why:"Twelve years in death care. I see families drowning in paperwork and I want the concierge credential to serve them beyond the funeral.",
+   community:"Metro Detroit funeral homes I already work with",availability:"Full-time",
+   status:"pending",token:null,notes:[],history:[{t:days(-4),s:"pending",by:"System"}],docs:[]},
+  {id:uid(),created_at:days(-6),full_name:"Delores Whitfield",email:"dwhit@example.com",phone:"734-555-0110",
+   city:"Ypsilanti, MI",background:"Social work / case management",tier:"cert_plan",
+   why:"Retired social worker. This is the work I always did informally. I want to do it with structure and dignity.",
+   community:"Seniors' ministry at my church",availability:"Part-time to start",
+   status:"admitted",token:token(),notes:[{t:days(-3),by:"You",text:"Excellent fit. Admit."}],
+   history:[{t:days(-6),s:"pending",by:"System"},{t:days(-5),s:"review",by:"You"},{t:days(-3),s:"admitted",by:"You"}],docs:[]},
+  {id:uid(),created_at:days(-1),full_name:"Anthony Reeves",email:"areeves@example.com",phone:"248-555-0175",
+   city:"Pontiac, MI",background:"Other",tier:"cert_full",
+   why:"Interested in the business opportunity.",community:"Not sure yet",availability:"Weekends only",
+   status:"pending",token:null,notes:[],history:[{t:days(-1),s:"pending",by:"System"}],docs:[]}
+];
+function days(n){const d=new Date();d.setDate(d.getDate()+n);return d.toISOString();}
+
+const DB = {
+  async list(){
+    if(USE_SB){ const {data}=await sb.from('applications').select('*').order('created_at',{ascending:false}); return data||[]; }
+    return DEMO.slice().sort((a,b)=>b.created_at.localeCompare(a.created_at));
+  },
+  async get(id){
+    if(USE_SB){ const {data}=await sb.from('applications').select('*').eq('id',id).single(); return data; }
+    return DEMO.find(a=>a.id===id);
+  },
+  async submit(rec){
+    rec.id=uid(); rec.created_at=now(); rec.status='pending'; rec.token=null;
+    rec.notes=[]; rec.history=[{t:now(),s:'pending',by:'System'}]; rec.docs=[];
+    if(USE_SB){ const {data,error}=await sb.from('applications').insert(rec).select().single(); if(error)throw error; return data; }
+    DEMO.push(rec); return rec;
+  },
+  async setStatus(id,s,by){
+    const app=await this.get(id); if(!app)return;
+    app.status=s; app.history=(app.history||[]).concat([{t:now(),s,by:by||'You'}]);
+    if(s==='admitted' && !app.token) app.token=token();
+    if(USE_SB){ await sb.from('applications').update({status:s,history:app.history,token:app.token}).eq('id',id); }
+    return app;
+  },
+  async addNote(id,text,by){
+    const app=await this.get(id); if(!app)return;
+    app.notes=(app.notes||[]).concat([{t:now(),by:by||'You',text}]);
+    if(USE_SB){ await sb.from('applications').update({notes:app.notes}).eq('id',id); }
+    return app;
+  },
+  async byToken(tok){
+    if(USE_SB){ const {data}=await sb.rpc('get_enrollment_by_token',{p_token:tok}); return (data&&data[0])||null; }
+    return DEMO.find(a=>a.token===tok) || null;
+  }
+};
+
+/* ============================================================
+   ROUTER
+============================================================ */
+const app = document.getElementById('app');
+function route(){
+  const h=(location.hash||'#apply');
+  document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on', h.startsWith('#'+a.dataset.r)));
+  if(h.startsWith('#enroll')) return viewEnroll();
+  if(h.startsWith('#admin'))  return ADMIN.authed? viewAdmin() : viewAdminLogin();
+  return viewApply();
+}
+window.addEventListener('hashchange',route);
+document.getElementById('demoTag').style.display = USE_SB? 'none':'block';
+
+/* ============================================================
+   VIEW: APPLY
+============================================================ */
+function viewApply(){
+  app.innerHTML = `
+  <div class="hero">
+    <div class="eyebrow">HomegoingHQ Academy · Concierge Certification</div>
+    <h1>Apply for admission</h1>
+    <p class="muted" style="color:#DCE3DC;max-width:60ch;margin:8px auto 0;">Tell us who you are and who you'd serve. We read every application personally, and we choose for heart, community roots, and follow-through — not résumés.</p>
+  </div>
+  <div class="card">
+    <form id="applyForm">
+      <div class="grid2">
+        <div><label>Full name *</label><input name="full_name" required></div>
+        <div><label>Email *</label><input name="email" type="email" required></div>
+      </div>
+      <div class="grid2">
+        <div><label>Phone</label><input name="phone"></div>
+        <div><label>City &amp; state</label><input name="city" placeholder="Detroit, MI"></div>
+      </div>
+      <label>Your background</label>
+      <select name="background">
+        <option>Ministry / church leadership</option>
+        <option>Funeral / death care</option>
+        <option>Social work / case management</option>
+        <option>Healthcare / hospice</option>
+        <option>Legal / financial</option>
+        <option>Other</option>
+      </select>
+      <label>Which tuition are you applying under?</label>
+      <select name="tier">
+        <option value="founding">Founding 100 — $99/mo</option>
+        <option value="cert_full">Certification — $995 one-time</option>
+        <option value="cert_plan">Certification — 3 payments of $525</option>
+      </select>
+      <label>Why this work? (a few sentences is plenty)</label>
+      <textarea name="why" placeholder="What draws you to walking with families through loss?"></textarea>
+      <label>The community you'd serve first</label>
+      <input name="community" placeholder="e.g., my church family and the east side of Detroit">
+      <label>Availability</label>
+      <select name="availability"><option>Part-time to start</option><option>Full-time</option><option>Weekends only</option><option>Exploring</option></select>
+      <label>Supporting document (optional)</label>
+      <input name="doc" type="file">
+      <div style="margin-top:22px;"><button class="btn" type="submit">Submit application →</button></div>
+      <p class="muted" style="font-size:13px;margin-top:12px;">We'll reply within three business days. Applying doesn't commit you to anything — the next step is a conversation. <strong>Payment happens only after acceptance.</strong></p>
+    </form>
+  </div>`;
+  document.getElementById('applyForm').addEventListener('submit', async e=>{
+    e.preventDefault();
+    const f=e.target, d=Object.fromEntries(new FormData(f).entries());
+    delete d.doc;
+    try{
+      await DB.submit(d);
+      app.innerHTML = `<div class="hero"><div class="eyebrow">Application received</div><h1>Thank you, ${escapeHtml(d.full_name.split(' ')[0])}.</h1>
+        <p style="color:#DCE3DC;max-width:56ch;margin:10px auto 0;">We read every application personally and will reply within three business days. If admitted, you'll receive a secure enrollment link by email — that's the only way to pay tuition.</p></div>
+        <div class="center"><a class="btn ghost" href="https://concierge.homegoinghq.com/">Back to the program</a></div>`;
+      window.scrollTo(0,0);
+    }catch(err){ alert('Something went wrong: '+err.message); }
+  });
+}
+
+/* ============================================================
+   VIEW: ADMIN LOGIN
+============================================================ */
+const ADMIN = { authed:false, email:null };
+function viewAdminLogin(){
+  app.innerHTML = `
+  <div style="max-width:420px;margin:60px auto;">
+    <div class="card">
+      <div class="eyebrow">Admissions</div>
+      <h2>Admin sign in</h2>
+      <form id="loginF">
+        <label>Email</label><input name="email" type="email" required value="${USE_SB?'':'admin@homegoinghq.com'}">
+        <label>Password</label><input name="pass" type="password" required value="${USE_SB?'':'demo'}">
+        <div style="margin-top:18px;"><button class="btn" type="submit">Sign in</button></div>
+      </form>
+      ${USE_SB?'':'<p class="muted" style="font-size:12px;margin-top:12px;">Demo login is pre-filled. In production this uses Supabase Auth.</p>'}
+    </div>
+  </div>`;
+  document.getElementById('loginF').addEventListener('submit', async e=>{
+    e.preventDefault();
+    const d=Object.fromEntries(new FormData(e.target).entries());
+    if(USE_SB){
+      const {error}=await sb.auth.signInWithPassword({email:d.email,password:d.pass});
+      if(error) return alert('Sign in failed: '+error.message);
+      ADMIN.authed=true; ADMIN.email=d.email;
+    } else {
+      if(d.email===CONFIG.ADMIN_DEMO.email && d.pass===CONFIG.ADMIN_DEMO.pass){ ADMIN.authed=true; ADMIN.email=d.email; }
+      else return alert('Invalid demo credentials.');
+    }
+    viewAdmin();
+  });
+}
+
+/* ============================================================
+   VIEW: ADMIN DASHBOARD
+============================================================ */
+let ADMIN_FILTER='all', ADMIN_Q='';
+async function viewAdmin(){
+  const all = await DB.list();
+  const counts = {}; STATUSES.forEach(s=>counts[s.k]=0); all.forEach(a=>counts[a.status]=(counts[a.status]||0)+1);
+  const filtered = all.filter(a=>{
+    const okS = ADMIN_FILTER==='all' || a.status===ADMIN_FILTER;
+    const q=ADMIN_Q.toLowerCase();
+    const okQ = !q || (a.full_name+a.email+(a.city||'')+(a.community||'')).toLowerCase().includes(q);
+    return okS && okQ;
+  });
+  const statCards = [
+    {k:'all',label:'Total',n:all.length},
+    {k:'pending',label:'Pending',n:counts.pending},
+    {k:'review',label:'Reviewing',n:counts.review},
+    {k:'admitted',label:'Admitted',n:counts.admitted},
+    {k:'waitlist',label:'Waitlisted',n:counts.waitlist},
+    {k:'denied',label:'Denied',n:counts.denied}
+  ].map(c=>`<div class="stat" style="cursor:pointer" onclick="ADMIN_FILTER='${c.k}';viewAdmin()"><b>${c.n||0}</b><span>${c.label}</span></div>`).join('');
+
+  app.innerHTML = `
+  <div class="row" style="justify-content:space-between;margin:22px 0 4px;">
+    <div><div class="eyebrow">Admissions dashboard</div><h2 style="margin:0;">Applications</h2></div>
+    <button class="btn ghost sm" onclick="ADMIN.authed=false;location.hash='#admin';route()">Sign out</button>
+  </div>
+  <div class="stats">${statCards}</div>
+  <div class="row" style="margin-bottom:12px;">
+    <input id="q" placeholder="Search name, email, community…" style="max-width:320px" value="${escapeHtml(ADMIN_Q)}">
+    <select id="fstatus" style="max-width:200px">
+      <option value="all">All statuses</option>
+      ${STATUSES.map(s=>`<option value="${s.k}" ${ADMIN_FILTER===s.k?'selected':''}>${s.label}</option>`).join('')}
+    </select>
+    <span class="muted" style="font-size:13px;">${filtered.length} shown</span>
+  </div>
+  <div class="card" style="padding:6px 10px;">
+    <table><thead><tr><th>Applicant</th><th>Community</th><th>Tuition</th><th>Applied</th><th>Status</th></tr></thead>
+    <tbody>
+      ${filtered.map(a=>`<tr class="clk" onclick="openDrawer('${a.id}')">
+        <td><strong>${escapeHtml(a.full_name)}</strong><br><span class="muted" style="font-size:12px;">${escapeHtml(a.email)}</span></td>
+        <td class="muted" style="font-size:13px;">${escapeHtml((a.community||'—').slice(0,40))}</td>
+        <td style="font-size:13px;">${tierLabel(a.tier)}</td>
+        <td class="muted" style="font-size:13px;">${fmt(a.created_at)}</td>
+        <td><span class="pill ${stMeta(a.status).cls}">${stMeta(a.status).label}</span></td>
+      </tr>`).join('') || `<tr><td colspan="5" class="muted" style="padding:20px;">No applications match.</td></tr>`}
+    </tbody></table>
+  </div>`;
+  document.getElementById('q').addEventListener('input',e=>{ADMIN_Q=e.target.value;clearTimeout(window._qt);window._qt=setTimeout(viewAdmin,180);});
+  document.getElementById('fstatus').addEventListener('change',e=>{ADMIN_FILTER=e.target.value;viewAdmin();});
+}
+
+/* ============================================================
+   DRAWER: application detail + actions
+============================================================ */
+async function openDrawer(id){
+  const a = await DB.get(id);
+  const dr=document.getElementById('drawer'), bg=document.getElementById('dbg');
+  const enrollLink = a.token ? `${CONFIG.ENROLL_BASE}?token=${a.token}` : null;
+  dr.innerHTML = `
+    <div class="dhead">
+      <span class="pill ${stMeta(a.status).cls}">${stMeta(a.status).label}</span>
+      <div style="flex:1"><strong>${escapeHtml(a.full_name)}</strong></div>
+      <button class="btn ghost sm" onclick="closeDrawer()">Close</button>
+    </div>
+    <div class="body">
+      <div class="grid2">
+        <div class="field"><div class="k">Email</div><div class="v">${escapeHtml(a.email)}</div></div>
+        <div class="field"><div class="k">Phone</div><div class="v">${escapeHtml(a.phone||'—')}</div></div>
+        <div class="field"><div class="k">City & state</div><div class="v">${escapeHtml(a.city||'—')}</div></div>
+        <div class="field"><div class="k">Availability</div><div class="v">${escapeHtml(a.availability||'—')}</div></div>
+        <div class="field"><div class="k">Background</div><div class="v">${escapeHtml(a.background||'—')}</div></div>
+        <div class="field"><div class="k">Tuition</div><div class="v">${tierLabel(a.tier)}</div></div>
+      </div>
+      <div class="field"><div class="k">Community they'd serve</div><div class="v">${escapeHtml(a.community||'—')}</div></div>
+      <div class="field"><div class="k">Why this work</div><div class="v">${escapeHtml(a.why||'—')}</div></div>
+      <hr>
+      <label>Change status</label>
+      <select id="stSel">${STATUSES.map(s=>`<option value="${s.k}" ${a.status===s.k?'selected':''}>${s.label}</option>`).join('')}</select>
+      <div class="row" style="margin-top:12px;">
+        <button class="btn sm" onclick="doApprove('${a.id}')">✓ Approve &amp; admit</button>
+        <button class="btn ghost sm" onclick="quickStatus('${a.id}','waitlist')">Waitlist</button>
+        <button class="btn ghost sm" onclick="quickStatus('${a.id}','deferred')">Defer</button>
+        <button class="btn ghost sm" onclick="quickStatus('${a.id}','conditional')">Conditional</button>
+        <button class="btn ghost sm" onclick="quickStatus('${a.id}','info')">Request info</button>
+        <button class="btn danger sm" onclick="doDeny('${a.id}')">Deny</button>
+      </div>
+      ${enrollLink? `<div class="banner"><strong>Admitted.</strong> Secure enrollment link (in the acceptance email):
+        <div class="tokenbox">${enrollLink}</div>
+        <button class="btn dark sm" onclick="navigator.clipboard.writeText('${enrollLink}');this.textContent='Copied ✓'">Copy link</button>
+        <button class="btn ghost sm" onclick="previewLetter('${a.id}')">Preview acceptance letter</button></div>`:''}
+      <hr>
+      <label>Internal notes</label>
+      <div id="noteList">${(a.notes||[]).map(n=>`<div class="note"><div class="meta">${escapeHtml(n.by)} · ${fmtT(n.t)}</div>${escapeHtml(n.text)}</div>`).join('')||'<p class="muted" style="font-size:13px;">No notes yet.</p>'}</div>
+      <textarea id="noteBox" placeholder="Add an internal note…"></textarea>
+      <div style="margin-top:8px;"><button class="btn ghost sm" onclick="addNote('${a.id}')">Add note</button></div>
+      <hr>
+      <label>Status history</label>
+      <div class="timeline">${(a.history||[]).slice().reverse().map(h=>`<div class="ev"><strong>${stMeta(h.s).label}</strong> · ${escapeHtml(h.by)} · ${fmtT(h.t)}</div>`).join('')}</div>
+    </div>`;
+  dr.classList.add('open'); bg.classList.add('open');
+  document.getElementById('stSel').addEventListener('change',async e=>{ await DB.setStatus(id,e.target.value); openDrawer(id); viewAdmin(); });
+}
+function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('dbg').classList.remove('open');}
+document.getElementById('dbg').addEventListener('click',closeDrawer);
+async function quickStatus(id,s){ await DB.setStatus(id,s); openDrawer(id); viewAdmin(); }
+async function addNote(id){ const t=document.getElementById('noteBox').value.trim(); if(!t)return; await DB.addNote(id,t); openDrawer(id); }
+async function doApprove(id){
+  const a=await DB.setStatus(id,'admitted');
+  // PRODUCTION: call the approve-applicant edge function to email the letter + link + CRM.
+  if(USE_SB){ try{ await fetch(`${CONFIG.SUPABASE_URL}/functions/v1/approve-applicant`,{method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+CONFIG.SUPABASE_ANON_KEY},
+      body:JSON.stringify({application_id:id})});}catch(e){console.warn('email fn',e);} }
+  openDrawer(id); viewAdmin();
+}
+async function doDeny(id){ if(!confirm('Deny this applicant? A denial email would be sent.'))return; await DB.setStatus(id,'denied'); openDrawer(id); viewAdmin(); }
+
+function previewLetter(id){ DB.get(id).then(a=>{ const w=window.open('','_blank'); w.document.write(letterHTML(a)); w.document.close(); }); }
+
+/* ============================================================
+   VIEW: ENROLL (token-gated)
+============================================================ */
+async function viewEnroll(){
+  const params=new URLSearchParams(location.hash.split('?')[1]||'');
+  const tok=params.get('token');
+  if(!tok){ app.innerHTML=gate("This enrollment page needs a secure link from your acceptance email."); return; }
+  const a=await DB.byToken(tok);
+  if(!a || a.status!=='admitted'){ app.innerHTML=gate("This enrollment link isn't active. If you've been admitted, use the exact link from your acceptance email."); return; }
+  const first=escapeHtml(a.full_name.split(' ')[0]);
+  const P=CONFIG.PAYTHEN;
+  app.innerHTML = `
+  <div class="hero"><div class="eyebrow">Admitted · Enrollment</div><h1>Welcome in, ${first}.</h1>
+    <p style="color:#DCE3DC;max-width:58ch;margin:10px auto 0;">You've been accepted into the HomegoingHQ Academy Concierge Certification. Complete your enrollment below and you'll be walked into your courses.</p></div>
+
+  <div class="card">
+    <div class="eyebrow">Next steps</div><h2>Three steps to your first course</h2>
+    <div class="steps">
+      <div class="st"><div class="n"></div><div><strong>Complete tuition</strong> — choose your option below (secure checkout by Stripe via Paythen).</div></div>
+      <div class="st"><div class="n"></div><div><strong>Set up your student account</strong> — right after payment you'll be taken to the Academy to create your login.</div></div>
+      <div class="st"><div class="n"></div><div><strong>Begin HC-101</strong> — start with Foundations and walk the path one lesson at a time.</div></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:18px;">
+    <div class="eyebrow">Tuition</div><h2>Complete your enrollment</h2>
+    <div class="tiers">
+      <div class="tier"><div class="lbl">Founding 100</div><div class="amt">$99<span style="font-size:15px">/mo</span></div>
+        <p class="muted" style="font-size:13px;">Certification + platform</p><a class="btn" href="${P.founding}">Start the plan</a></div>
+      <div class="tier"><div class="lbl">Certification</div><div class="amt">$995</div>
+        <p class="muted" style="font-size:13px;">One-time, paid in full</p><a class="btn" href="${P.cert_full}">Pay tuition</a></div>
+      <div class="tier"><div class="lbl">Payment plan</div><div class="amt">3×$525</div>
+        <p class="muted" style="font-size:13px;">Access opens on payment 1</p><a class="btn" href="${P.cert_plan}">Start the plan</a></div>
+    </div>
+    <p class="muted" style="font-size:12px;">This secure link is tied to your admission. Access to courses is granted only to admitted students after payment.</p>
+  </div>
+
+  <div class="card" style="margin-top:18px;">
+    <div class="grid2">
+      <div><div class="eyebrow">Program start</div><ul>${CONFIG.START_DATES.map(d=>`<li>${escapeHtml(d)}</li>`).join('')}</ul></div>
+      <div><div class="eyebrow">Orientation</div><p class="muted" style="font-size:14px;">A live welcome session opens each cohort. You'll get the calendar invite after enrollment.</p></div>
+    </div>
+    <hr>
+    <div class="eyebrow">Good to know</div>
+    <p class="muted" style="font-size:14px;"><strong>Self-paced.</strong> Eight courses, 32 lessons, 32 assessments. <strong>Support.</strong> Reply to your acceptance email anytime. <strong>Certificate.</strong> Awarded on completion of all eight courses.</p>
+  </div>`;
+}
+function gate(msg){ return `<div class="hero"><div class="eyebrow">Enrollment</div><h1>Almost there</h1>
+  <p style="color:#DCE3DC;max-width:52ch;margin:10px auto 0;">${msg}</p></div>
+  <div class="center"><a class="btn ghost" href="#apply">Apply for admission</a></div>`; }
+
+/* ============================================================
+   Acceptance letter template (also used by edge function)
+============================================================ */
+function letterHTML(a){
+  const link=`${CONFIG.ENROLL_BASE}?token=${a.token}`;
+  return `<!doctype html><html><head><meta charset="utf-8"><title>Admission — ${escapeHtml(a.full_name)}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Cinzel:wght@500;600&family=Public+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>body{font-family:'Public Sans',sans-serif;background:#F6F2EA;color:#26332E;margin:0;padding:40px;}
+  .sheet{max-width:640px;margin:0 auto;background:#FFFDF9;border:1px solid #E4DDCE;border-radius:14px;padding:48px;box-shadow:0 4px 20px rgba(38,51,46,.08);}
+  .seal{width:70px;height:70px;margin:0 auto 18px;display:block;}
+  h1{font-family:'Cinzel',serif;text-align:center;letter-spacing:.06em;font-size:24px;margin:0 0 4px;}
+  .ey{text-align:center;font-weight:700;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8F6A24;margin-bottom:20px;}
+  p{font-size:15px;line-height:1.65;} .btn{display:inline-block;background:#8F6A24;color:#fff;text-decoration:none;padding:13px 26px;border-radius:10px;font-weight:700;}
+  .fr{font-family:'Fraunces',serif;}</style></head>
+  <body><div class="sheet">
+  <svg class="seal" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#26332E" stroke="#8F6A24" stroke-width="5"/><circle cx="50" cy="50" r="39" fill="none" stroke="#C9A24B" stroke-width="1.4"/><text x="50" y="66" text-anchor="middle" font-family="Fraunces,serif" font-size="46" fill="#C9A24B">H</text></svg>
+  <div class="ey">HomegoingHQ Academy</div>
+  <h1>Letter of Admission</h1>
+  <p class="fr" style="text-align:center;color:#68756D;">${fmt(now())}</p>
+  <p>Dear ${escapeHtml(a.full_name)},</p>
+  <p>It is our honor to offer you admission to the <strong>HomegoingHQ Academy Concierge Certification</strong>. We read your application personally, and your heart for ${escapeHtml((a.community||'the families you will serve'))} is exactly the kind of care this work is built on.</p>
+  <p>You were chosen not for a résumé, but for community roots and follow-through. We believe you will walk with families well.</p>
+  <p>To accept your seat and begin, complete your enrollment through your secure link below. This link is tied to your admission and is yours alone.</p>
+  <p style="text-align:center;margin:28px 0;"><a class="btn" href="${link}">Complete your enrollment →</a></p>
+  <p>We walk with — never manage. Welcome to the work.</p>
+  <p class="fr" style="margin-top:26px;">Dr. Jessie E. Kilgore Jr.<br><span style="color:#68756D;font-size:13px;font-family:'Public Sans';">Founder &amp; President, HomegoingHQ</span></p>
+  </div></body></html>`;
+}
+
+/* utils */
+function escapeHtml(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function tierLabel(t){return {founding:'Founding $99/mo',cert_full:'Cert $995',cert_plan:'Cert 3×$525'}[t]||'—';}
+
+route();
+</script>
+</body>
+</html>

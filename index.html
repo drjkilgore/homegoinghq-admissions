@@ -196,7 +196,7 @@ const DB = {
   async submit(rec){
     rec.id=uid(); rec.created_at=now(); rec.status='pending'; rec.token=null;
     rec.notes=[]; rec.history=[{t:now(),s:'pending',by:'System'}]; rec.docs=[];
-    if(USE_SB){ const {data,error}=await sb.from('applications').insert(rec).select().single(); if(error)throw error; return data; }
+    if(USE_SB){ const {error}=await sb.from('applications').insert(rec); if(error)throw error; return rec; }
     DEMO.push(rec); return rec;
   },
   async setStatus(id,s,by){
